@@ -5,20 +5,9 @@ from odoo.http import request
 import json
 
 
-class Test(http.Controller):
-    # @http.route('/test/test/', auth='public')
-    # def index(self, **params):
-    #     return "Hello, world"
-
-    @http.route('/test/test/', website=True, auth='public')
-    def index(self, **kw):
-        return request.render("test.test", {
-            'tests': ['test1', 'test2', 'test3']
-        })
-    
-    @http.route('/create/', type='json', auth='public', methods=['POST', 'OPTIONS'],  csrf=False, cors='*')
-    # @cross_origin()
-    def create(self, **params):
+class UserCreation(http.Controller):
+    @http.route('/user/create/', type='json', auth='public', methods=['POST', 'OPTIONS'],  csrf=False, cors='*')
+    def create_user(self, **params):
         body= json.loads(request.httprequest.data)
         params = body.get('parms')
         res = http.request.env['res.users'].sudo().create({
