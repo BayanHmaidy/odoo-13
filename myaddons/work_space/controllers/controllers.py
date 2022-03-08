@@ -49,7 +49,7 @@ class User(http.Controller):
         if user.exists():
             employee = http.request.env['hr.employee'].sudo().browse(int(user.employee_id))
             first_name, last_name = user.name.split(" ")
-            
+            Response.status = "200"
             # get compnay info
             company = http.request.env['res.company'].sudo().browse(int(user.company_id))
             return {
