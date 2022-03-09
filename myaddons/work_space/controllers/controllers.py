@@ -18,7 +18,7 @@ class User(http.Controller):
         created_user = http.request.env['res.users'].sudo().create({
             'name': f"{user['first_name']} {user['last_name']}",
             'login': user['email'],
-            'mobile_phone': user['mobile_phone'],
+            'mobile': user['mobile'],
             'password': user['password'],
             'company_id': user['company_id'],
             'active': True
@@ -31,12 +31,12 @@ class User(http.Controller):
             'user_id': created_user.id,
             'active': True
             })
-
+        Response.status = "201" 
         return {
             'user_id': created_user.id,
             'name': f"{user['first_name']} {user['last_name']}",
             'login': user['email'],
-            'mobile_phone': user['mobile_phone'],
+            'mobile': user['mobile'],
             'password': user['password'],
             'company_id': user['company_id'],
             'active': True
@@ -49,7 +49,7 @@ class User(http.Controller):
         if user.exists():
             employee = http.request.env['hr.employee'].sudo().browse(int(user.employee_id))
             first_name, last_name = user.name.split(" ")
-            
+            Response.status = "200"
             # get compnay info
             company = http.request.env['res.company'].sudo().browse(int(user.company_id))
             return {
@@ -57,7 +57,7 @@ class User(http.Controller):
                 "first_name": first_name,
                 "last_name": last_name,
                 "email": user.login,
-                "mobile_phone": user.mobile_phone,
+                "mobile": user.mobile,
                 "company_name": company.name,
                 "active": user.active,
             }
@@ -69,8 +69,8 @@ class User(http.Controller):
 
         body= json.loads(request.httprequest.data)
         parameters = body.get('user')
+        
         user = http.request.env['res.users'].sudo().browse(user_id)
-
         if user.exists():
             if parameters.get('first_name') or parameters.get('last_name'):
                 current_first_name, current_last_name = user.name.split(" ")
@@ -82,7 +82,7 @@ class User(http.Controller):
                     del parameters['first_name']
                 if parameters.get('last_name'):
                     del parameters['last_name']
-
+            Response.status = "201"
             user.write(parameters)
             return parameters
 
