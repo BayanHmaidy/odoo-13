@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from re import U
 from odoo import http
-from odoo.http import request, Response
+from odoo.http import request
 import json
 class User(http.Controller):
     @http.route('/user/create/', type='json', auth='public', methods=['POST', 'OPTIONS'],  csrf=False, cors='*')
@@ -11,16 +11,24 @@ class User(http.Controller):
         
         existed_user = http.request.env['res.users'].sudo().search([('login', '=', user['email'])])
         if(existed_user): 
-            Response.status = "409" 
-            return ("Bad request, email already exists")
+            return {
+                "status_code": 409,
+                "details": "Bad request email already exists"
+            }
+        
+        # create partner
+        created_partner = request.env['res.partner'].sudo().create({
+            'name': f"{user['first_name']} {user['last_name']}"
+        })
 
         # create new user
-        created_user = http.request.env['res.users'].sudo().create({
+        created_user = request.env['res.users'].sudo().create({
             'name': f"{user['first_name']} {user['last_name']}",
             'login': user['email'],
             'mobile': user['mobile'],
             'password': user['password'],
             'company_id': user['company_id'],
+            'partner_id': created_partner.id,
             'active': True
             })
 
@@ -29,15 +37,14 @@ class User(http.Controller):
             'name': f"{user['first_name']} {user['last_name']}",
             "company_id": user['company_id'],
             'user_id': created_user.id,
-            'active': True
             })
-        Response.status = "201" 
+
         return {
+            'status_code': 200,
             'user_id': created_user.id,
             'name': f"{user['first_name']} {user['last_name']}",
             'login': user['email'],
             'mobile': user['mobile'],
-            'password': user['password'],
             'company_id': user['company_id'],
             'active': True
             }
@@ -49,10 +56,10 @@ class User(http.Controller):
         if user.exists():
             employee = http.request.env['hr.employee'].sudo().browse(int(user.employee_id))
             first_name, last_name = user.name.split(" ")
-            Response.status = "200"
             # get compnay info
             company = http.request.env['res.company'].sudo().browse(int(user.company_id))
             return {
+                "status_code": 200,
                 "user_id": user.id, 
                 "first_name": first_name,
                 "last_name": last_name,
@@ -61,8 +68,10 @@ class User(http.Controller):
                 "company_name": company.name,
                 "active": user.active,
             }
-        Response.status = "404" 
-        return ("User not found")    
+        return {
+            "status_code": 404,
+            "details": "User not found"
+        }
 
     @http.route('/user/update/<int:user_id>', type="json", auth='public', methods=['PUT', 'OPTIONS'], csrf=False, cors='*')
     def update_user(self, user_id):
@@ -82,12 +91,14 @@ class User(http.Controller):
                     del parameters['first_name']
                 if parameters.get('last_name'):
                     del parameters['last_name']
-            Response.status = "201"
             user.write(parameters)
+            parameters['status_code'] = "201"
             return parameters
 
-        Response.status = "404" 
-        return ("User not found")
+        return {
+            "status_code": 404,
+            "details": "User not found"
+        }
 
 
     @http.route('/user/deactivate/<int:user_id>', type="json", auth='public', methods=['PUT', 'OPTIONS'], csrf=False, cors='*')
@@ -98,4 +109,7 @@ class User(http.Controller):
             user.write({"active": False})
             employee.write({"active": False})
             return (user.active, employee.active)
-        return {"messsage": "Not found"}
+        return {
+            "status_code": 404,
+            "details": "User not found"
+        }
