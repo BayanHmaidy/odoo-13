@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<odoo>
+    <record id="hr_leave_view_form" model="ir.ui.view">
+        <field name="arch" type="xml">
+            <field name="button"> 
+            <button string="Refuse" name="action_refuse"  type="object" attrs="{'invisible': ['|', ('can_approve', '=', False), ('state', 'not in', ('confirm','validate','validate1'))]}"/>
+        </field>
+    </record>
+</odoo>

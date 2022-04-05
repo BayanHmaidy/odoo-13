@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'hr', 'hr_attendance', 'hr_holidays'],
+    'depends': ['base', 'hr', 'hr_attendance', 'hr_holidays', 'hr_attendances', 'hr_holidays_calendar_extended', 'hr_holidays_extended'],
 
     # always loaded
     'data': [
