@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="hr_attendance_view_filter" model="ir.ui.view">
+        <field name="name">hr_attendance_view_filter</field>
+        <field name="model">hr.attendance</field>
+        <field name="arch" type="xml">
+            <search string="Hr Attendance Search">
+                <field name="employee_id"/>
+                <field name="department_id" operator="child_of"/>
+            </search>
+        </field>
+    </record>
+
+       <record id="hr_attendance_action" model="ir.actions.act_window">
+        <field name="name">Attendances</field>
+        <field name="res_model">hr.attendance</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="domain">[('employee_id.user_id.id', '=', uid)]</field>
+        <field name="search_view_id" ref="hr_attendance_view_filter" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">
+                No attendance records found
+            </p><p>
+                The attendance records of your employees will be displayed here.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="hr_attendance.menu_hr_attendance_view_attendances" 
+              name="Attendances" 
+              parent="hr_attendance.menu_hr_attendance_manage_attendances" 
+              sequence="10"  
+              action="hr_attendance_action"/>
+
+
+</odoo>
