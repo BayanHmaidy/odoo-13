@@ -3,22 +3,22 @@
     <data>
         <!-- Casual leave -->
         <record id="hr_holidays.holiday_status_cl" model="hr.leave.type">
-            <field name="validity_start" eval="time.strftime('%Y-%m-%d')"/>
+            <field name="validity_start"/>
         </record>
         
         <!-- Sick leave -->
         <record id="hr_holidays.holiday_status_sl" model="hr.leave.type">
-            <field name="validity_start" eval="time.strftime('%Y-%m-%d')"/>
+            <field name="validity_start"/>
         </record>
 
         <!-- Compensatory Days -->
          <record id="hr_holidays.holiday_status_comp" model="hr.leave.type">
-            <field name="validity_start" eval="time.strftime('%Y-%m-%d')"/>
+            <field name="validity_start"/>
         </record>
 
         <!--Unpaid Leave -->
         <record id="hr_holidays.holiday_status_unpaid" model="hr.leave.type">
-            <field name="validity_start" eval="time.strftime('%Y-%m-%d')"/>
+            <field name="validity_start"/>
         </record>
     </data>
 </odoo>
