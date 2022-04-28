@@ -14,3 +14,4 @@ class hr_leave(models.Model):
                                  readonly=False,
                                  stored=True,
                                  compute='_today_date')
+

@@ -8,6 +8,7 @@ class User(http.Controller):
     def create_user(self, **user):
         body= json.loads(request.httprequest.data)
         user = body.get('user')
+        # group_employee = env.ref('base.group_user')
         
         existed_user = http.request.env['res.users'].sudo().search([('login', '=', user['email'])])
         if(existed_user): 
@@ -29,15 +30,65 @@ class User(http.Controller):
             'password': user['password'],
             'company_id': user['company_id'],
             'partner_id': created_partner.id,
-            'active': True
+            'active': True,
+            'sel_groups_17_18_19': 17,
+            'sel_groups_15_13_14': 15,
+            'tz': 'Asia/Amman'
             })
 
         # create employee
-        http.request.env['hr.employee'].sudo().create({
+        employee = http.request.env['hr.employee'].sudo().create({
             'name': f"{user['first_name']} {user['last_name']}",
             "company_id": user['company_id'],
             'user_id': created_user.id,
+            'parent_id': 28,
             })
+
+        paid_allocation = http.request.env['hr.leave.allocation'].sudo().create({
+            'name': 'paid time off',
+            'holiday_status_id': 1,
+            'allocation_type': 'accrual',
+            'number_per_interval': 9.20547936,
+            'unit_per_interval': 'hours',
+            'interval_number': 1,
+            'interval_unit': 'months',
+            'number_of_days': 0.00,
+            'holiday_type': 'employee',
+            'employee_id': employee.id
+        })
+
+        paid_allocation.action_approve()
+        paid_allocation.action_validate()
+
+        unpaid_allocation = http.request.env['hr.leave.allocation'].sudo().create({
+            'name': 'unpaid time off',
+            'holiday_status_id': 6,
+            'allocation_type': 'accrual',
+            'number_per_interval': 9.20547936,
+            'unit_per_interval': 'hours',
+            'interval_number': 1,
+            'interval_unit': 'months',
+            'number_of_days': 0.00,
+            'holiday_type': 'employee',
+            'employee_id': employee.id
+        })
+
+        unpaid_allocation.action_approve()
+        unpaid_allocation.action_validate()
+    
+
+        for allocation in range(14):
+            sick_allocation = http.request.env['hr.leave.allocation'].sudo().create({
+                'name': 'sick time off',
+                'holiday_status_id': 5,
+                'allocation_type': 'regular',
+                'number_of_hours_display': 8,
+                'holiday_type': 'employee',
+                'employee_id': employee.id,
+            })
+
+            sick_allocation.action_approve()
+            sick_allocation.action_validate()
 
         return {
             'status_code': 200,
@@ -48,6 +99,7 @@ class User(http.Controller):
             'company_id': user['company_id'],
             'active': True
             }
+       
 
     @http.route('/user/<int:user_id>', type="json", auth='public', methods=['GET', 'OPTIONS'],  csrf=False, cors='*')
     def get_user(self, user_id):
