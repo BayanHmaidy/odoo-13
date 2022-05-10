@@ -22,13 +22,13 @@ class User(http.Controller):
         })
 
         # create new user
-        user = request.env['res.users'].sudo().create({
+        created_user = request.env['res.users'].sudo().create({
             'name': f"{user['first_name']} {user['last_name']}",
             'login': user['email'],
             'mobile': user['mobile'],
             'password': user['password'],
             'company_id': user['company_id'],
-            'partner_id': created_partner.id,
+            'partner_id': partner.id,
             'active': True,
             'email': user['email'],
             'sel_groups_17_18_19': 17,
