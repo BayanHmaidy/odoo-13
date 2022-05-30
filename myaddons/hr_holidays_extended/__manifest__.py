@@ -27,7 +27,8 @@ A synchronization with an internal agenda (Meetings of the CRM module) is also p
     'data': [ 
         'data/hr_holidays_data.xml',
         'views/hr_leave_view.xml',
-        'views/hr_holidays.xml'
+        'views/hr_holidays.xml',
+        'views/hr_leave_views.xml'
     ],
     'qweb': [
         'static/src/xml/time_off_calendar.xml',

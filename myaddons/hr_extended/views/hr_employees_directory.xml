@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+    <record id="hr_employee_public_action_managers" model="ir.actions.act_window">
+            <field name="name">My Employees</field>
+            <field name="res_model">hr.employee.public</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Add a new employee
+              </p><p>
+                With just a quick glance on the Odoo employee screen, you
+                can easily find all the information you need for each person;
+                contact data, job position, availability, etc.
+              </p>
+            </field>
+        </record>
+
+        <menuitem
+            id="menu_hr_employee_manager"
+            name="My Employee Directory"
+            action="hr_employee_public_action_managers"
+            parent="hr.menu_hr_employee"
+            sequence="5"/>
+
+    </data>
+</odoo>

@@ -18,7 +18,9 @@ actions(Check in/Check out) performed by them.
     'website': 'https://www.odoo.com/page/employees',
     'depends': ['hr_attendance', 'base', 'hr'],
     'data': [
-        'views/admin_attendances.xml'
+        'views/admin_attendances.xml',
+        'views/manager_employees_attendance.xml',
+        'views/reporting.xml'
     ],
     'demo': [
     

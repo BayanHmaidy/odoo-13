@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="work_space.module_category_authority">
+            <field name="name">Authority</field>
+            <field name="sequence">7</field>
+        </record>
+
+        <record id="group_admin_access" model="res.groups">
+            <field name="name">Admin</field>
+            <field name="category_id" ref="work_space.module_category_authority"/>
+        </record>
+
+        <record id="group_manager_access" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="work_space.module_category_authority"/>
+            <field name="implied_ids" eval="[(4, ref('work_space.group_admin_access'))]"/>
+        </record>
+
+        <record id="hr_leave_rule_manager" model="ir.rule">
+            <field name="name">Time Off Administrator</field>
+            <field name="model_id" ref="hr_holidays.model_hr_leave"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('group_admin_access')), (4, ref('group_manager_access'))]"/>
+        </record>
+
+        <record id="hr_leave_allocation_rule_manager" model="ir.rule">
+            <field name="name">Allocations: administrator: no limit</field>
+            <field name="model_id" ref="hr_holidays.model_hr_leave_allocation"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('group_admin_access')), (4, ref('group_manager_access'))]"/>
+        </record>
+
+        <record id="hr_leave_rule_user_read" model="ir.rule">
+            <field name="name">Time Off All Approver read</field>
+            <field name="model_id" ref="hr_holidays.model_hr_leave"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="groups" eval="[(4, ref('group_admin_access')), (4, ref('group_manager_access'))]"/>
+        </record>
+
+        <record id="hr_leave_rule_officer_update" model="ir.rule">
+            <field name="name">Time Off All Approver create/write</field>
+            <field name="model_id" ref="hr_holidays.model_hr_leave"/>
+            <field name="domain_force">[
+                ('holiday_type', '=', 'employee'),
+                '|',
+                    '&amp;',
+                        ('employee_id.user_id', '=', user.id),
+                        ('state', '!=', 'validate'),
+                    '|',
+                        ('employee_id.user_id', '!=', user.id),
+                        ('employee_id.user_id', '=', False)
+            ]</field>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="groups" eval="[(4, ref('group_admin_access')), (4, ref('group_manager_access'))]"/>
+        </record>
+
+        <record id="hr_leave_allocation_rule_officer_read" model="ir.rule">
+            <field name="name">Allocations: see all time off: read all</field>
+            <field name="model_id" ref="hr_holidays.model_hr_leave_allocation"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="groups" eval="[(4, ref('group_admin_access')), (4, ref('group_manager_access'))]"/>
+        </record>
+
+        <record id="hr_leave_allocation_rule_officer_update" model="ir.rule">
+            <field name="name">Allocations: see all time off: create/write/unlink own + managed employee + without department + same or managed department</field>
+            <field name="model_id" ref="hr_holidays.model_hr_leave_allocation"/>
+            <field name="domain_force">['|',
+    '|', ('employee_id.user_id', '=', user.id), ('employee_id.parent_id.user_id', '=', user.id),
+    '|', '|', ('department_id', '=', False), ('department_id.member_ids.user_id', 'in', [user.id]), ('department_id.manager_id.user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('group_admin_access')), (4, ref('group_manager_access'))]"/>
+        </record>
+
+        <record id="resource_leaves_holidays_user" model="ir.rule">
+            <field name="name">Time Off Resources: All Approver</field>
+            <field name="model_id" ref="hr_holidays.model_resource_calendar_leaves"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('group_admin_access')), (4, ref('group_manager_access'))]"/>
+        </record> 
+
+
+        <record id="hr_attendance_rule_attendance_manager" model="ir.rule">
+            <field name="name">attendance officer: full access</field>
+            <field name="model_id" ref="hr_attendance.model_hr_attendance"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('group_admin_access')), (4, ref('group_manager_access'))]"/>
+        </record>
+
+        <record model="ir.rule" id="resource_calendar_leaves_rule_group_admin_modify">
+            <field name="name">resource.calendar.leaves: admin modifies global</field>
+            <field name="model_id" ref="resource.model_resource_calendar_leaves"/>
+            <field name="groups" eval="[(4, ref('group_admin_access')), (4, ref('group_manager_access'))]"/>
+            <field name="domain_force">[('resource_id', '=', False)]</field>
+            <field name="perm_read" eval="False"/>
+        </record>
+
+        <record id="ir_filters_admin_all_rights_rule" model="ir.rule">
+            <field name="name">ir.filters.admin.all.rights</field>
+            <field name="model_id" ref="base.model_ir_filters"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('group_admin_access')), (4, ref('group_manager_access'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <record id="res_company_rule_erp_manager" model="ir.rule">
+            <field name="name">company rule erp manager</field>
+            <field name="model_id" ref="base.model_res_company"/>
+            <field eval="False" name="global"/>
+            <field name="groups" eval="[(4, ref('group_admin_access')), (4, ref('group_manager_access'))]"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+        <record id="res_partner_rule_private_group" model="ir.rule">
+            <field name="name">res.partner.rule.private.group</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="domain_force">
+                [('type', '=', 'private')]
+            </field>
+            <field name="groups" eval="[(4, ref('group_admin_access')), (4, ref('group_manager_access'))]" />
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="ir_rule_sms_template_system" model="ir.rule">
+            <field name="name">SMS Template: system group granted all</field>
+            <field name="model_id" ref="sms.model_sms_template"/>
+            <field name="groups" eval="[(4, ref('group_admin_access')), (4, ref('group_manager_access'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+        </record>
+
+        <record id="ir_rule_sms_template_system" model="ir.rule">
+            <field name="name">SMS Template: unnecessary rule for system group</field>
+            <field name="model_id" ref="sms.model_sms_template"/>
+            <field name="groups" eval="[(4, ref('group_admin_access')), (4, ref('group_manager_access'))]"/>
+            <!-- TDE NOTE: remove me in master, broken fix from odoo/odoo#64626 -->
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="perm_read" eval="False"/>
+        </record>
+
+            <record model="ir.rule" id="ir_default_system_rule">
+                <field name="name">Defaults: alter all defaults</field>
+                <field name="model_id" ref="base.model_ir_default"/>
+                <field name="domain_force">[(1,'=',1)]</field>
+                <field name="groups" eval="[(4, ref('group_admin_access')), (4, ref('group_manager_access'))]"/>
+                <field name="perm_read" eval="False"/>
+            </record>
+
+    </data>
+</odoo>

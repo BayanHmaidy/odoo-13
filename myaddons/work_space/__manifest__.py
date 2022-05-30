@@ -20,13 +20,27 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'hr', 'hr_attendance', 'hr_holidays', 'hr_attendances', 'hr_holidays_calendar_extended', 'hr_holidays_extended', 'backend_theme_odoo13'],
+    'depends': ['base', 
+                'hr', 
+                'hr_attendance', 
+                'hr_holidays', 
+                'hr_attendances', 
+                'hr_holidays_calendar_extended', 
+                'hr_holidays_extended', 
+                'backend_theme_odoo13',
+                'product' ,
+                'digest',
+                'utm',
+                'hr_extended'
+                ],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
+        'security/security.xml',
+        'security/ir.model.access.csv'
     ],
     # only loaded in demonstration mode
     'demo': [

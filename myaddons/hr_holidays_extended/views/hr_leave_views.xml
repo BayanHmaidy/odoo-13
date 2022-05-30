@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<odoo>
+    <record id="hr_leave_action_all_manager" model="ir.actions.act_window">
+        <field name="name">Time Off (My Employees)</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.leave</field>
+        <field name="binding_model_id" eval="False"/>
+        <field name="view_mode">tree,kanban,form,calendar,activity</field>
+        <field name="context">{}</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree'}),
+            (0, 0, {'view_mode': 'kanban'}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('hr_holidays.hr_leave_view_form_manager')}),
+            (0, 0, {'view_mode': 'calendar'}),
+            (0, 0, {'view_mode': 'activity'})]"/>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new time off request
+            </p>
+        </field>
+    </record>
+
+    <record id="hr_leave_allocation_action_all_manager" model="ir.actions.act_window">
+        <field name="name">All Allocations (My Employees)</field>
+        <field name="res_model">hr.leave.allocation</field>
+        <field name="view_mode">tree,kanban,form,activity</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new time off allocation request
+            </p><p>
+                Time Off Officers allocate time off days to employees (e.g. paid time off).<br/>
+                Employees request allocations to Time Off Officers (e.g. recuperation days).
+            </p>
+        </field>
+    </record>
+
+    <record id="action_hr_available_holidays_report_manager" model="ir.actions.act_window">
+        <field name="name">Time Off Analysis (My Employees)</field>
+        <field name="res_model">hr.leave</field>
+        <field name="view_mode">graph,pivot,calendar,form</field>
+        <field name="context">{'search_default_year': 1, 'search_default_group_employee': 1, 'search_default_group_type': 1}</field>
+    </record>
+</odoo>
