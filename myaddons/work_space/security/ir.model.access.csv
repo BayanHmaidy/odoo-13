@@ -1,2 +1,84 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_work_space_work_space,work_space.work_space,model_work_space_work_space,base.group_user,1,1,1,1
+access_res_groups_group_erp_manager,res_groups group_erp_manager,base.model_res_groups,work_space.group_admin_access,1,1,1,1
+access_ir_module_category_group_user,ir_module_category group_user,base.model_ir_module_category,work_space.group_admin_access,1,0,0,0
+access_barcode_nomenclature_manager,barcode.nomenclature.manager,barcodes.model_barcode_nomenclature,work_space.group_admin_access,1,1,1,1
+access_barcode_rule_manager,barcode.rule.manager,barcodes.model_barcode_rule,work_space.group_admin_access,1,1,1,1
+access_res_company_group_erp_manager,res_company group_erp_manager,base.model_res_company,work_space.group_admin_access,1,1,1,1
+access_digest_digest_system,digest.digest.administration,digest.model_digest_digest,work_space.group_admin_access,1,1,1,1
+access_digest_tip_system,digest.tip.administration,digest.model_digest_tip,work_space.group_admin_access,1,1,1,1
+access_ir_model_fields_group_erp_manager,ir_model_fields group_erp_manager,base.model_ir_model_fields,work_space.group_admin_access,1,1,1,1
+access_ir_model_fields_selection_group_erp_manager,ir_model_fields_selection group_erp_manager,base.model_ir_model_fields_selection,work_space.group_admin_access,1,1,1,1
+access_ir_filter_erp_manager,ir_filters all,base.model_ir_filters,work_space.group_admin_access,1,1,1,1
+access_ir_logging,ir_logging admin,base.model_ir_logging,work_space.group_admin_access,1,1,1,1
+access_ir_model_access_group_erp_manager,ir_model_access_group_erp_manager,base.model_ir_model_access,work_space.group_admin_access,1,1,1,1
+access_ir_model_constraint_group_erp_manager,ir_model_constraint group_erp_manager,base.model_ir_model_constraint,work_space.group_admin_access,1,1,1,1
+access_ir_model_data_group_erp_manager,ir_model_data group_erp_manager,base.model_ir_model_data,work_space.group_admin_access,1,1,1,1
+access_ir_model_group_erp_manager,ir_model group_erp_manager,base.model_ir_model,work_space.group_admin_access,1,1,1,1
+access_ir_rule_group_erp_manager,ir_rule group_erp_manager,base.model_ir_rule,work_space.group_admin_access,1,1,1,1
+access_ir_model_relation_group_erp_manager,ir_model_relation group_erp_manager,base.model_ir_model_relation,work_space.group_admin_access,1,1,1,1
+access_res_users_group_erp_manager,res_users group_erp_manager,base.model_res_users,work_space.group_admin_access,1,1,1,1
+access_hr_holidays_manager_request,hr.holidays.manager.request,hr_holidays.model_hr_leave,work_space.group_admin_access,1,1,1,1
+access_hr_holidays_manager_allocation,hr.holidays.manager.allocation,hr_holidays.model_hr_leave_allocation,work_space.group_admin_access,1,1,1,1
+access_mail_activity_type_holidays_manager,mail.activity.type.holidays.manager,mail.model_mail_activity_type,work_space.group_admin_access,1,1,1,1
+access_calendar_event_type_manager,calendar.event.type.manager,calendar.model_calendar_event_type,work_space.group_admin_access,1,1,1,1
+access_mail_blacklist_system,access_mail_blacklist_system,mail.model_mail_blacklist,work_space.group_admin_access,1,1,1,1
+access_phone_blacklist_system,access.phone.blacklist.system,phone_validation.model_phone_blacklist,work_space.group_admin_access,1,1,1,1
+access_product_product_manager,product.product manager,product.model_product_product,work_space.group_admin_access,1,1,1,1
+access_product_template_manager,product.template.manager,product.model_product_template,work_space.group_admin_access,1,1,1,1
+access_ir_actions_act_url_group_system,ir_actions_act_url_group_system,base.model_ir_actions_act_url,work_space.group_admin_access,1,1,1,1
+access_ir_actions_act_window_system,ir_actions_act_window_system,base.model_ir_actions_act_window,work_space.group_admin_access,1,1,1,1
+access_ir_actions_act_window_close_group_system,ir_actions_act_window_close_group_system,base.model_ir_actions_act_window_close,work_space.group_admin_access,1,1,1,1
+access_ir_actions_act_window_view_group_system,ir_actions_act_window_view_group_system,base.model_ir_actions_act_window_view,work_space.group_admin_access,1,1,1,1
+access_ir_actions_group_system,ir_actions_group_system,base.model_ir_actions_actions,work_space.group_admin_access,1,1,1,1
+access_mail_activity_type_system,mail.activity.type.system,mail.model_mail_activity_type,work_space.group_admin_access,1,1,1,1
+access_product_attribute_value_manager,product.attribute value manager,product.model_product_attribute_value,work_space.group_admin_access,1,1,1,1
+access_res_bank_group_system,res_bank_group_system,base.model_res_bank,work_space.group_admin_access,1,1,1,1
+access_calendar_contacts,access_calendar_contacts,calendar.model_calendar_contacts,work_space.group_admin_access,1,1,1,1
+access_utm_stage_system,mail.utm.stage,utm.model_utm_stage,work_space.group_admin_access,1,1,1,1
+access_ir_actions_todo_group_system,ir_actions_todo group system,base.model_ir_actions_todo,work_space.group_admin_access,1,1,1,1
+access_res_currency_group_system,res_currency group_system,base.model_res_currency,work_space.group_admin_access,1,1,1,1
+access_res_currency_rate_group_system,res_currency_rate group_system,base.model_res_currency_rate,work_space.group_admin_access,1,1,1,1
+access_decimal_precision_config,decimal.precision configuration,base.model_decimal_precision,work_space.group_admin_access,1,1,1,1
+access_ir_default_group_system,ir_default group_system,base.model_ir_default,work_space.group_admin_access,1,1,1,1
+access_mail_followers_system,mail.followers.system,mail.model_mail_followers,work_space.group_admin_access,1,1,1,1
+access_mail_alias_system,mail.alias.system,mail.model_mail_alias,work_space.group_admin_access,1,1,1,1
+access_mail_template_system,mail.template_system,mail.model_mail_template,work_space.group_admin_access,1,1,1,1 
+access_client_iap_account_manager,iap.account.manager,iap.model_iap_account,work_space.group_admin_access,1,1,1,1
+access_fetchmail_server,fetchmail.server,fetchmail.model_fetchmail_server,work_space.group_admin_access,1,1,1,1
+access_res_partner_industry_group_system,res_partner_industry group_system,base.model_res_partner_industry,work_space.group_admin_access,1,1,1,1
+access_res_lang_group_user,res_lang group_user,base.model_res_lang,work_space.group_admin_access,1,1,1,1
+access_ir_mail_server,ir_mail_server,base.model_ir_mail_server,work_space.group_admin_access,1,1,1,1
+access_mail_tracking_value_system,mail.tracking.value.system,mail.model_mail_tracking_value,work_space.group_admin_access,1,1,1,1
+access_ir_ui_menu_group_system,ir_ui_menu group_system,base.model_ir_ui_menu,work_space.group_admin_access,1,1,1,1
+access_mail_notification_system, mail.notification.system,mail.model_mail_notification,work_space.group_admin_access,1,1,1,1
+access_ir_module_module_group_user,ir_module_module group_user,base.model_ir_module_module,work_space.group_admin_access,1,1,1,1
+access_ir_module_module_dependency_group_system,ir_module_module_dependency group_system,base.model_ir_module_module_dependency,work_space.group_admin_access,1,1,1,1
+access_ir_module_module_exclusion_group_system,ir_module_module_exclusion group_system,base.model_ir_module_module_exclusion,work_space.group_admin_access,1,1,1,1
+access_mail_mail_system,mail.mail.system,mail.model_mail_mail,work_space.group_admin_access,1,1,1,1
+access_sms_sms_system,access.sms.sms.system,sms.model_sms_sms,work_space.group_admin_access,1,1,1,1
+paperformat_access_employee,ir_actions_report_paperformat group_system,base.model_report_paperformat,work_space.group_admin_access,1,1,1,1
+access_partner_autocomplete_sync_system,res.partner.autocomplete.sync.system,partner_autocomplete.model_res_partner_autocomplete_sync,work_space.group_admin_access,1,1,1,1
+access_hr_employee_category_user,hr.employee.category.user,hr.model_hr_employee_category,work_space.group_admin_access,1,1,1,1
+access_hr_employee_user,hr.employee user,hr.model_hr_employee,work_space.group_admin_access,1,1,1,1
+access_hr_employee_resource_user,resource.resource.user,resource.model_resource_resource,work_space.group_admin_access,1,1,1,1
+access_hr_department_user,hr.department.user,hr.model_hr_department,work_space.group_admin_access,1,1,1,1
+access_hr_job_user,hr.job user,hr.model_hr_job,work_space.group_admin_access,1,1,1,1
+access_ir_property_hr_user,ir_property hr_user,base.model_ir_property,work_space.group_admin_access,1,1,1,0
+access_hr_plan_activity_type_hr_user,access_hr_plan_activity_type,hr.model_hr_plan_activity_type,work_space.group_admin_access,1,1,1,1
+access_hr_plan_hr_user,access_hr_plan_hr_user,hr.model_hr_plan,work_space.group_admin_access,1,1,1,1
+access_hr_attendance_user,hr.attendance.user,hr_attendance.model_hr_attendance,work_space.group_admin_access,1,1,1,1
+access_hr_attendance_system_user,hr.attendance.system.user,hr_attendance.model_hr_attendance,work_space.group_admin_access,1,1,1,0
+access_hr_holidays_status_manager,hr.holidays.status manager,hr_holidays.model_hr_leave_type,work_space.group_admin_access,1,1,1,1
+access_calendar_attendee_hr_user,calendar.attendee.hr.user,calendar.model_calendar_attendee,work_space.group_admin_access,1,1,1,1
+access_hr_holidays_status_manager,hr.holidays.status manager,hr_holidays.model_hr_leave_type,work_space.group_manager_access,1,1,1,1
+access_calendar_attendee_hr_user,calendar.attendee.hr.user,calendar.model_calendar_attendee,work_space.group_manager_access,1,1,1,1
+access_hr_employee_category_user,hr.employee.category.user,hr.model_hr_employee_category,work_space.group_manager_access,1,1,1,1
+access_hr_employee_user,hr.employee user,hr.model_hr_employee,work_space.group_manager_access,1,1,1,1
+access_hr_employee_resource_user,resource.resource.user,resource.model_resource_resource,work_space.group_manager_access,1,1,1,1
+access_hr_department_user,hr.department.user,hr.model_hr_department,work_space.group_manager_access,1,1,1,1
+access_hr_job_user,hr.job user,hr.model_hr_job,work_space.group_manager_access,1,1,1,1
+access_ir_property_hr_user,ir_property hr_user,base.model_ir_property,work_space.group_manager_access,1,1,1,0
+access_hr_plan_activity_type_hr_user,access_hr_plan_activity_type,hr.model_hr_plan_activity_type,work_space.group_manager_access,1,1,1,1
+access_hr_plan_hr_user,access_hr_plan_hr_user,hr.model_hr_plan,work_space.group_manager_access,1,1,1,1
+access_hr_attendance_user,hr.attendance.user,hr_attendance.model_hr_attendance,work_space.group_manager_access,1,1,1,1
+access_hr_attendance_system_user,hr.attendance.system.user,hr_attendance.model_hr_attendance,work_space.group_manager_access,1,1,1,0

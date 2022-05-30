@@ -40,7 +40,7 @@ class User(http.Controller):
         employee = http.request.env['hr.employee'].sudo().create({
             'name': f"{user['first_name']} {user['last_name']}",
             "company_id": user['company_id'],
-            'user_id': created_user.id
+            'user_id': created_user.id,
             })
 
         paid_allocation = http.request.env['hr.leave.allocation'].sudo().create({
@@ -87,7 +87,6 @@ class User(http.Controller):
         })
 
         sick_allocation.action_approve()
-            # sick_allocation.action_validate()
 
         return {
             'status_code': 200,

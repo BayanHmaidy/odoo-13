@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    
+    <record id="hr_attendance_action_graph_manager" model="ir.actions.act_window">
+        <field name="name">My Employees Attendance Analysis</field>
+        <field name="res_model">hr.attendance</field>
+        <field name="view_mode">graph,pivot</field>
+        <field name="view_id"></field>  <!-- force empty -->
+    </record>
+
+    </data>
+</odoo>
